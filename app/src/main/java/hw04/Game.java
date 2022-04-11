@@ -26,6 +26,7 @@ public class Game {
         this.tileList.shuffle();
 
     }
+    //
     public void newGame(){
         UserInterface ui = new UserInterface();
         //ui.tiles(tileList);
