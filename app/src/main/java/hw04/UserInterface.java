@@ -72,28 +72,28 @@ public class UserInterface {
 
     }
 
-
+//I made some adjustments to the game board -M.E.
     public void board(Stage stage, String playerNum){
         stage.setTitle("Acquire");
         System.out.println(playerNum);
         BorderPane borderPane = new BorderPane();
-        borderPane.setCenter(createBoard());
+        borderPane.setBottom(createBoard());
         int n = Integer.parseInt(playerNum);
-        borderPane.setBottom(makePlayer(n));
-        borderPane.setRight(makeSideMenu());
-        Scene board = new Scene(borderPane, 800, 800);
+        borderPane.setTop(makePlayer(n));
+        borderPane.setLeft(makeSideMenu());
+        Scene board = new Scene(borderPane, 700, 650);
         stage.setScene(board);
         stage.show();
     }
 
     public Parent createBoard() {
-        int BOARD_HIGHT = 9;
+        int BOARD_HEIGHT = 9;
         int BOARD_WIDTH = 12;
 
         GridPane gameBoard = new GridPane();
         gameBoard.setPrefSize(800, 800);
 
-        for (int i = 0; i < BOARD_HIGHT; i++) {
+        for (int i = 0; i < BOARD_HEIGHT; i++) {
 
             for (int j = 0; j < BOARD_WIDTH; j++) {
                 String[] letters = new String[]{"A", "B", "C", "D", "E", "F", "G", "H", "I"};
@@ -101,7 +101,6 @@ public class UserInterface {
                 Rectangle tile = new Rectangle(50, 50);
                 tile.setFill(Color.WHITE);
                 tile.setStroke(Color.BLACK);
-
                 Text text = new Text();
                 text.setFont(Font.font(20));
                 text.setText(Integer.toString(j+1)+"-"+letters[i]);
@@ -111,7 +110,7 @@ public class UserInterface {
         }
         return gameBoard;
     }
-
+//We need to implement the actual player hands because it is random right now -M.E.
     public void drawMove(Text text) {
         text.setText("d");
         text.setFill(Color.GRAY);
@@ -168,6 +167,7 @@ public class UserInterface {
                 Tile t = nowPlayer.getTileList().getTile(j);
                 Text name = new Text(t.getName());
                 gridPane.add(name, i,j);
+                gridPane.setHgap(27);
             }
             tiles.getChildren().add(gridPane);
             sideMenuHBox.getChildren().add(tiles);
