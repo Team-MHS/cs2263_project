@@ -1,5 +1,6 @@
 package hw04;
 
+import javafx.application.Platform;
 import lombok.Getter;
 
 import java.lang.reflect.Array;
@@ -29,10 +30,20 @@ public class Game {
     //
     public void newGame(){
         UserInterface ui = new UserInterface();
-        //ui.tiles(tileList);
-        for(int i =0; i < tileList.getSize(); i++){
-            System.out.println("game ffff"+tileList.getTile(i).getName());
+        int playerNum = players.size();
+        System.out.println("player num "+playerNum);
 
+    }
+
+    public void makePlayer(Player player){
+        this.players.add(player);
+        System.out.println("make player num "+this.players.size());
+        for(int i = 0; i < this.players.size(); i++){
+            Player nowPlayer = players.peek();
+            for(int j =0; j < nowPlayer.getTileList().getSize(); j++){
+               System.out.println(nowPlayer.getTileList().getTile(j).getName());
+
+            }
         }
     }
 
@@ -67,6 +78,7 @@ public class Game {
 
     public void nextPlayer(){
         int playerNum = players.size();
+        System.out.println("player num "+playerNum);
         if(this.players.size() > 0){
             if(this.nowPlayer == null){
                 nowPlayer = players.peek();

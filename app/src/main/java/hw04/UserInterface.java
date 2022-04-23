@@ -75,7 +75,7 @@ public class UserInterface {
 //I made some adjustments to the game board -M.E.
     public void board(Stage stage, String playerNum){
         stage.setTitle("Acquire");
-        System.out.println(playerNum);
+        System.out.println("user interface player num "+playerNum);
         BorderPane borderPane = new BorderPane();
         borderPane.setBottom(createBoard());
         int n = Integer.parseInt(playerNum);
@@ -129,8 +129,9 @@ public class UserInterface {
             for(int j =0; j < 6; j++){
                 Tile t = this.game.tileLists().remove(j);
                 player.addTile(t);
-                System.out.println(player.getTileList().getTile(j).getName());
+                //System.out.println(player.getTileList().getTile(j).getName());
             }
+
             VBox playerVBox = new VBox();
             Text name = new Text(player.getName());
             Text balance = new Text("$" + player.getMoney());
@@ -141,7 +142,7 @@ public class UserInterface {
             gridPane.add(balance,0,1);
             gridPane.setVgap(15);
             playerVBox.getChildren().add(gridPane);
-
+            this.game.makePlayer(player);
             players.add(player);
             playersHBox.getChildren().add(playerVBox);
         }
@@ -159,10 +160,10 @@ public class UserInterface {
         for(int i = 0; i < players.size(); i++ ){
             VBox tiles = new VBox();
             Player nowPlayer = players.get(i);
-            System.out.println("who "+nowPlayer.getName());
-            System.out.println("list size "+nowPlayer.getTileList().getSize());
+            //System.out.println("who "+nowPlayer.getName());
+            //System.out.println("list size "+nowPlayer.getTileList().getSize());
             for(int j = 0; j < nowPlayer.getTileList().getSize(); j++){
-                System.out.println(nowPlayer.getTileList().getTile(j).getName());
+                //System.out.println(nowPlayer.getTileList().getTile(j).getName());
 
                 Tile t = nowPlayer.getTileList().getTile(j);
                 Text name = new Text(t.getName());
