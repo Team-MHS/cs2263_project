@@ -124,7 +124,7 @@ public class UserInterface {
         HBox playersHBox = new HBox();
         for (int i=1; i<=playerNum; i++){
 
-            String playerName = "Player" + i;
+            String playerName = "Player " + i;
             Player player = new Player(playerName);
             for(int j =0; j < 6; j++){
                 Tile t = this.game.tileLists().remove(j);

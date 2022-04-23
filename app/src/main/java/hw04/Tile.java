@@ -11,7 +11,7 @@ public class Tile {
     public Tile(int x, char y) {
         this.x = x;
         this.y = y;
-        this.name = y + "-" + x;
+        this.name = x + "-" + y;
     }
 
     public String getName() {
