@@ -7,7 +7,7 @@ import java.lang.reflect.Array;
 import java.util.*;
 
 public class Game {
-    @Getter private Queue<Player> players;
+    @Getter private List<Player> players;
     private Player nowPlayer;
     private Share shares;
     @Getter private TileList tileList;
@@ -16,7 +16,7 @@ public class Game {
 
 
     public Game(){
-        this.players = new ArrayDeque<>();
+        this.players = new LinkedList<>();
         this.tileList = new TileList();
         this.corporations = makeCorporations();
         for(char x = 1; x <= '\f'; ++x) {
@@ -35,28 +35,21 @@ public class Game {
 
     }
 
-    public void makePlayer(Player player){
-        this.players.add(player);
-        System.out.println("make player num "+this.players.size());
-        for(int i = 0; i < this.players.size(); i++){
-            Player nowPlayer = players.peek();
-            for(int j =0; j < nowPlayer.getTileList().getSize(); j++){
-               System.out.println(nowPlayer.getTileList().getTile(j).getName());
-
+    public void makePlayer(int playerNum){
+        int temp =4;
+        for(int i = 0; i < playerNum; i++){
+            String playerName = "Player" + i;
+            Player player = new Player(playerName);
+            for(int j =0; j < 6; j++){
+                Tile t = this.tileList.remove(j);
+                player.addTile(t);
+                //System.out.println(player.getTileList().getTile(j).getName());
             }
+            this.players.add(player);
         }
-    }
 
-    public int playerNum(int num){
-        System.out.println("Game player num "+num);
-        for(int i = 0; i < num; i++){
-            Player p = new Player("Player"+i);
-            players.add(p);
-        }
-        for(Player p : players){
-            System.out.println(p.getName());
-        }
-        return num;
+        System.out.println("make player num "+this.players.size());
+
     }
 
 
@@ -76,20 +69,28 @@ public class Game {
         return corporations;
     }
 
-    public void nextPlayer(){
-        int playerNum = players.size();
-        System.out.println("player num "+playerNum);
-        if(this.players.size() > 0){
-            if(this.nowPlayer == null){
-                nowPlayer = players.peek();
-            }else{
-                players.offer(players.poll());
-                nowPlayer = players.peek();
-            }
+    public void placeTile(int x, char y){
 
-
-        }
     }
+
+
+//    public void nextPlayer(){
+//        int playerNum = players.size();
+//        System.out.println("player num "+playerNum);
+//        if(this.players.size() > 0){
+//            if(this.nowPlayer == null){
+//                nowPlayer = players.peek();
+//            }else{
+//                players.offer(players.poll());
+//                nowPlayer = players.peek();
+//            }
+//
+//
+//        }
+//    }
+
+
+
 
 
 }

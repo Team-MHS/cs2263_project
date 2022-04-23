@@ -19,6 +19,7 @@ import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class UserInterface {
     @Setter private Stage stage;
@@ -26,6 +27,7 @@ public class UserInterface {
     private Game game = new Game();
     private TileList tileList;
     private List<Player> players = new ArrayList<>();
+    private Player nowPlayer;
 
     public void welcomeScreen(Stage stage) throws Exception {
         game.newGame();
@@ -72,7 +74,7 @@ public class UserInterface {
 
     }
 
-//I made some adjustments to the game board -M.E.
+    //I made some adjustments to the game board -M.E.
     public void board(Stage stage, String playerNum){
         stage.setTitle("Acquire");
         System.out.println("user interface player num "+playerNum);
@@ -110,7 +112,7 @@ public class UserInterface {
         }
         return gameBoard;
     }
-//We need to implement the actual player hands because it is random right now -M.E.
+    //We need to implement the actual player hands because it is random right now -M.E.
     public void drawMove(Text text) {
         text.setText("d");
         text.setFill(Color.GRAY);
@@ -120,17 +122,11 @@ public class UserInterface {
     }
 
     public HBox makePlayer(int playerNum){
-
+        this.game.makePlayer(playerNum);
         HBox playersHBox = new HBox();
-        for (int i=1; i<=playerNum; i++){
 
-            String playerName = "Player " + i;
-            Player player = new Player(playerName);
-            for(int j =0; j < 6; j++){
-                Tile t = this.game.tileLists().remove(j);
-                player.addTile(t);
-                //System.out.println(player.getTileList().getTile(j).getName());
-            }
+        for (int i=0; i<playerNum; i++){
+            Player player = this.game.getPlayers().get(i);
 
             VBox playerVBox = new VBox();
             Text name = new Text(player.getName());
@@ -142,7 +138,6 @@ public class UserInterface {
             gridPane.add(balance,0,1);
             gridPane.setVgap(15);
             playerVBox.getChildren().add(gridPane);
-            this.game.makePlayer(player);
             players.add(player);
             playersHBox.getChildren().add(playerVBox);
         }
@@ -181,6 +176,12 @@ public class UserInterface {
 //        }
         return sideMenuHBox;
     }
+
+//    public HBox makeRightMenu(){
+//        HBox rightMenuHBox = new HBox();
+//        GridPane gridPane = new GridPane();
+//
+//    }
 
 
 }
