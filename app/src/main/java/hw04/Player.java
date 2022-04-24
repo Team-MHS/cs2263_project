@@ -72,7 +72,7 @@ public class Player {
 
     public void buyShares(Share s) { this.playerShares.add(s);}
 
-    public void seeShares(Share s) { this.playerShares.remove(s);}
+    public void sellShares(Share s) { this.playerShares.remove(s);}
     public List<Share> getPlayerShares() {return this.playerShares;}
 
 

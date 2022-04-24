@@ -26,6 +26,8 @@
 
 package hw04;
 
+import lombok.Getter;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -35,16 +37,16 @@ public class Corporation {
     private final int NUMBER_OF_STOCKS = 25;
 
     private String name;
-    private String color;
-    private Integer price;
+    @Getter private Integer price;
+    private boolean madeCorporation;
     private List<Tile> tiles;
-    private List<Share> shares;
+    @Getter private List<Share> shares;
     private HashMap<String, List<Share>> shares2;
     TileList tileList;
 
-    public Corporation(String name, String color, Integer price) {
+    public Corporation(String name, boolean tf , Integer price) {
         this.name = name;
-        this.color = color;
+        this.madeCorporation = tf;
         this.price = price;
         this.shares = setShares();
 //
@@ -67,7 +69,7 @@ public class Corporation {
         return share;
     }
 
-    private void sellShares(Player owner){
+    public void sellShares(Player owner){
         Share share = shares.get(0);
         shares.remove(share);
         share.changeOwner(owner.getName());
@@ -75,10 +77,10 @@ public class Corporation {
         owner.removeMoney(price);
     }
 
-    private void returnShares(Player owner, Share share){
+    public void returnShares(Player owner, Share share){
         share.changeOwner(null);
         shares.add(share);
-        owner.seeShares(share);
+        owner.sellShares(share);
         owner.addMoney(price);
     }
 
@@ -86,5 +88,6 @@ public class Corporation {
         return tiles.size() >= SAFT_CORPORATION;
     }
 
+    public boolean isMade() { return this.madeCorporation;}
 }
 

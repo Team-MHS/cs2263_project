@@ -57,6 +57,10 @@ public class TileList {
         return (Tile)this.tiles.get(n);
     }
 
+    public List<Tile> getTiles() {
+        return tiles;
+    }
+
 
 
 }

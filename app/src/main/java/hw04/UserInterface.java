@@ -109,6 +109,7 @@ public class UserInterface {
         int n = Integer.parseInt(playerNum);
         borderPane.setTop(makePlayer(n));
         borderPane.setLeft(makeSideMenu());
+        borderPane.setRight(makeRightMenu());
         Scene board = new Scene(borderPane, 700, 650);
         stage.setScene(board);
         stage.show();
@@ -149,6 +150,8 @@ public class UserInterface {
 
     public HBox makePlayer(int playerNum){
         this.game.makePlayer(playerNum);
+        this.game.nextPlayer();
+        this.nowPlayer = this.game.getNowPlayer();
         HBox playersHBox = new HBox();
 
         for (int i=0; i<playerNum; i++){
@@ -203,11 +206,36 @@ public class UserInterface {
         return sideMenuHBox;
     }
 
-//    public HBox makeRightMenu(){
-//        HBox rightMenuHBox = new HBox();
-//        GridPane gridPane = new GridPane();
-//
-//    }
+    public HBox makeRightMenu(){
+        HBox rightMenuHBox = new HBox();
+
+        Button b = new Button("next");
+        b.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                goNextPlayer();
+
+            }
+        });
+
+        GridPane gridPane = new GridPane();
+        this.nowPlayer = this.game.getNowPlayer();
+        String n = nowPlayer.getName();
+        Text name = new Text(n);
+
+        gridPane.add(name,0,0);
+        gridPane.add(b,1,0);
+        System.out.println(nowPlayer.getName());
+        rightMenuHBox.getChildren().add(gridPane);
+
+        return rightMenuHBox;
+    }
+
+    public void goNextPlayer(){
+        this.game.nextPlayer();
+        this.nowPlayer = this.game.getNowPlayer();
+        System.out.println("interface " + this.nowPlayer.getName());
+    }
 
 
 }
