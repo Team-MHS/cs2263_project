@@ -89,5 +89,13 @@ public class Corporation {
     }
 
     public boolean isMade() { return this.madeCorporation;}
+
+    public Integer getPrice() {
+        return price;
+    }
+
+    public List<Share> getShares() {
+        return shares;
+    }
 }
 
