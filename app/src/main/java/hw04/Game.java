@@ -2,13 +2,14 @@ package hw04;
 
 import javafx.application.Platform;
 import lombok.Getter;
+import org.checkerframework.checker.units.qual.C;
 
 import java.lang.reflect.Array;
 import java.util.*;
 
 public class Game {
-    @Getter private List<Player> players;
-    private Player nowPlayer;
+    @Getter private LinkedList<Player> players;
+    @Getter private Player nowPlayer;
     private Share shares;
     @Getter private TileList tileList;
     @Getter private List<Corporation> corporations;
@@ -36,7 +37,6 @@ public class Game {
     }
 
     public void makePlayer(int playerNum){
-        int temp =4;
         for(int i = 0; i < playerNum; i++){
             String playerName = "Player" + i;
             Player player = new Player(playerName);
@@ -59,13 +59,13 @@ public class Game {
 
     public List<Corporation> makeCorporations(){
         List<Corporation> corporations = new ArrayList<>();
-        corporations.add(new Corporation("corporation 1", "red", 200));
-        corporations.add(new Corporation("corporation 2", "yellow", 200));
-        corporations.add(new Corporation("corporation 3", "green", 200));
-        corporations.add(new Corporation("corporation 4", "blue", 200));
-        corporations.add(new Corporation("corporation 5", "purple", 200));
-        corporations.add(new Corporation("corporation 6", "orange", 200));
-        corporations.add(new Corporation("corporation 7", "pink", 200));
+        corporations.add(new Corporation("corporation 1", false, 200));
+        corporations.add(new Corporation("corporation 2", false, 200));
+        corporations.add(new Corporation("corporation 3", false, 200));
+        corporations.add(new Corporation("corporation 4", false, 200));
+        corporations.add(new Corporation("corporation 5", false, 200));
+        corporations.add(new Corporation("corporation 6", false, 200));
+        corporations.add(new Corporation("corporation 7", false, 200));
         return corporations;
     }
 
@@ -73,21 +73,48 @@ public class Game {
 
     }
 
+    public void nextPlayer(){
+        int playerNum = players.size();
+        System.out.println("player num "+playerNum);
+        if(this.players.size() > 0){
+            if(this.nowPlayer == null){
+                System.out.println("null?");
+                nowPlayer = players.peek();
+            }else{
+                System.out.println("not null?");
 
-//    public void nextPlayer(){
-//        int playerNum = players.size();
-//        System.out.println("player num "+playerNum);
-//        if(this.players.size() > 0){
-//            if(this.nowPlayer == null){
-//                nowPlayer = players.peek();
-//            }else{
-//                players.offer(players.poll());
-//                nowPlayer = players.peek();
-//            }
-//
-//
-//        }
-//    }
+                players.offer(players.poll());
+                nowPlayer = players.peek();
+                System.out.println(nowPlayer.getName());
+            }
+
+
+        }
+    }
+
+
+
+    private void buyShare() {
+        //index of corporation is from interface, Planning to implement later
+        Corporation corporation = this.corporations.get(1);
+        if(corporation.isMade()){
+            if(corporation.getShares().size() > 0){
+                if(nowPlayer.getMoney() >= corporation.getPrice()){
+                    corporation.sellShares(nowPlayer);
+                }
+                // not enough money
+            }
+        }
+    }
+
+    private void sellShare(){
+        //index of corporation is from interface, Planning to implement later
+        Corporation corporation = this.corporations.get(1);
+        Share share = new Share(nowPlayer.getName());
+        if(corporation.isMade()){
+            corporation.returnShares(nowPlayer, share);
+        }
+    }
 
 
 
