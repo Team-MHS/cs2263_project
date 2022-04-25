@@ -147,20 +147,20 @@ public class Game {
         return players;
     }
 
-    //    public void nextPlayer(){
-//        int playerNum = players.size();
-//        System.out.println("player num "+playerNum);
-//        if(this.players.size() > 0){
-//            if(this.nowPlayer == null){
-//                nowPlayer = players.peek();
-//            }else{
-//                players.offer(players.poll());
-//                nowPlayer = players.peek();
-//            }
-//
-//
-//        }
-//    }
+//       public void nextPlayer(){
+////        int playerNum = players.size();
+////        System.out.println("player num "+playerNum);
+////        if(this.players.size() > 0){
+////            if(this.nowPlayer == null){
+////                nowPlayer = players.peek();
+////            }else{
+////                players.offer(players.poll());
+////                nowPlayer = players.peek();
+////            }
+////
+////
+////        }
+////    }
 
 
 

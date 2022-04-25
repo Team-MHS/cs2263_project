@@ -51,6 +51,8 @@ interface ClientInterface {
 
      void endTurn();
 
+     void getPrice();
+
      void quitGame();
 
 

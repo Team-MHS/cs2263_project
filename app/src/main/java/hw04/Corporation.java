@@ -44,6 +44,7 @@ public class Corporation {
     private HashMap<String, List<Share>> shares2;
     TileList tileList;
 
+
     public Corporation(String name, boolean tf , Integer price) {
         this.name = name;
         this.madeCorporation = tf;
