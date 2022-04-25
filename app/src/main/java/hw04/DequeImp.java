@@ -83,4 +83,9 @@ public class DequeImp implements ClientInterface{
     public void quitGame() {
 
     }
+
+    @Override
+    public void getPrice() {
+
+    }
 }
